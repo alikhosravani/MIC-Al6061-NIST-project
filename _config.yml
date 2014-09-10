@@ -4,7 +4,7 @@ title: "Extract Microstructure-Property-Process linkages in aging of Al6061 alum
 email: alikhosravani@gmail.com
 description: >
   find microstructure-Property-Process relations in aging of Al6061 alloy during which grain structure, texture, and precipitate structure evolve.
-baseurl: "/research-pages" # replace ``/research-pages`` with the name of the parents repository
+baseurl: "/MIC-Al6061-NIST-project" # replace ``/research-pages`` with the name of the parents repository
 url: "Al6061-NIST-projcet.github.io" # replate ``Materials-Informatics-Lab`` with your Github username
 twitter_username: twitterhandle
 disqus: tonyfast
