@@ -5,7 +5,7 @@ email: alikhosravani@gmail.com
 description: >
   find microstructure-Property-Process relations in aging of Al6061 alloy during which grain structure, texture, and precipitate structure evolve.
 baseurl: "/MIC-Al6061-NIST-project" # replace ``/research-pages`` with the name of the parents repository
-url: "Al6061-NIST-project.github.io" # replate ``Materials-Informatics-Lab`` with your Github username
+url: "alikhosravani" # replate ``Materials-Informatics-Lab`` with your Github username
 twitter_username: twitterhandle
 disqus: tonyfast
 
