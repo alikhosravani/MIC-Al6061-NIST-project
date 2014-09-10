@@ -1,9 +1,17 @@
-_This is an EBSD datasets for as-received sample and associated pole figures
+---
+layout: post
+title: Example of EBSD maps
+---
+## Description
+
+this datasets are from as-received and heattreated sample
+
+This is an EBSD datasets for as-received sample and associated pole figures
 
 ![IPF maps for as-received sample](https://farm6.staticflickr.com/5556/14943293647_54f9855ac3.jpg)
 ![Pole figures for as-received sample](https://farm4.staticflickr.com/3898/15106925376_120cf13733.jpg)
 
-_This is an EBSD datasets for the sample heat treated at 180 C for 120 minutes and its associated pole figures
+This is an EBSD datasets for the sample heat treated at 180 C for 120 minutes and its associated pole figures
 
 ![IPF maps for the heat treated sample](https://farm4.staticflickr.com/3906/15129483372_b2229a7e40.jpg)
 ![Pole figures for the heat treated sample](https://farm4.staticflickr.com/3874/15126935831_34c6faf721.jpg)
