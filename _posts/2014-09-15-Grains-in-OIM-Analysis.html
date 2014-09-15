@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "Grains in OIM Analysis"
+author: jsweaver
+date:   2014-09-15 11:00:00
+
+---
+# OIM Analysis #
+Orientation Image Microscopy (OIM) Anaysis software is used to analyze Electron Backscatter Diffraction (EBSD). The data collection and analysis software is a commercial package from [EDAX-TSL](http://www.edax.com/Products/EBSD/OIM-Data-Analysis-Microstructure-Analysis.aspx). One important feature of the analysis is grain size.
+
+# Grain Size Analysis#
+## Grain Size Parameters##
+
+First off the data can be understood as pixels. Each pixel has an orientation and physical scale associated with it. In order to define a grain, a **grain tolerance angle** needs to be specified. This angle is the allowable misorientation between neighboring pixels. Secondly in order to avoid counting noise in the data as grains, a **minimum grain size** is also specified.
+
+The defaults are 5 degrees and 2 microns respectively.
+
+### Misorientation ###
+Misorientation refers to the rotation required to bring Grain A into coincidence with Grain B. The description can be made as an axis-angle pair, Rodrigues Vector, or with Bunger-Euler angles. Most times, only the angle from the axis-angle pair is considered, and the minimum angle (multiple axis-angle pairs can accomplish AB coincidence) is used.
+
+## Grain Size Formula
+The default grain size calculation is to insert the area of the grain into the equation for area of a circle. From this the equivalent diameter can be found.
+Insert formula here
+
+### ASTM Grain Size ###
+Insert formula here
+
+### Grain Shape ###
+The most you can do here is treating the grain as an oval. The major and minor axes can be calculated as the max and min chord lengths or through a least squares fit to the equation of an oval.
+
+---
+### *References/Resources*
+* OIM Analysis Manual 7.0.1
+* [http://neon.mems.cmu.edu/rollett/27750/27750.html](http://neon.mems.cmu.edu/rollett/27750/27750.html)
+
