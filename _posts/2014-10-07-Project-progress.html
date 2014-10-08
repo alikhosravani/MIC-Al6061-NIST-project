@@ -5,14 +5,6 @@ author: alikhosravani
 date:   2014-10-07 11:40:00 
 ---
 
-# Extract Microstructure-Property-Process linkages in aging of Al6061 aluminum alloy#
-Team Members: 
-
-Ali Khosravani -Mechanical Engineering
-
-Jordan Weaver - Mechanical Engineering
-
-
 EBSD data are collected for As-Recived, and heat treated ones at 400, 525, 650, and 775 F
 
 **Here are collcetd data:**
@@ -37,5 +29,22 @@ EBSD data are collected for As-Recived, and heat treated ones at 400, 525, 650, 
 * Max value for 525: 2.769
 * Max value for 650: 2.432
 * Max value for 775: 2.696
+
+Here is an example of **Grain Size** distribution for As-Received sample
+
+https://farm4.staticflickr.com/3936/15478965335_aa2963f53d_n.jpg
+
+The GS distribution is from large maps which contains about 75 smaller scans. When TSl software put these smaller maps together it cannot take care of merging grains at the edge of scan. Since the scan area is large there is an artifitial change in orientation because of tilted beam. 
+
+Here is an example of the issue:
+![](https://farm4.staticflickr.com/3929/15478316552_af1b7bf475_n.jpg)
+![](https://farm3.staticflickr.com/2948/15455580076_fe724c9bf4_n.jpg)
+
+TSL software splits grains at the edge of each scan, This is a Grain ID map of two scanned areas
+![](https://farm4.staticflickr.com/3938/15292020478_bdb2331e33_m.jpg)
+
+### Next Steps
+1. Fix the issue in attaching EBSD batches
+2. 2-point spatial statistics on percipitates using either SEM or OM images 
 
 
