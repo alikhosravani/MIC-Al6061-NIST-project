@@ -123,8 +123,13 @@ P = Find_Peaks( Q, 'neighborhood',5, 'diff', false);
 
 
 %% Threshold potential centers
-threshmult = 2;
-B = P & E < [mean(E(:)) - std(E(:)) * threshmult] ;
+% These are the two key parameters to modify to change the segmentation.
+
+threshmult = 1.5;
+cutoffpix = [mean(E(:)) - std(E(:)) * threshmult];
+%%
+
+B = P & E < cutoffpix;
 
 %%
 % Find matrix positions of centers
@@ -149,5 +154,15 @@ xlim([ 280.0309  792.0309])
 ylim([ 305.9960  817.9960])
 title( sprintf( '%i precipitates found. ZOOMED', numel( pid )  ) )
 snapnow;    
+
+%% Export Centers as JSON
+
+% Create export structure
+precipitate = struct( 'center', [xx, yy], 'cutoff', cutoffpix, 'file', content(2).('local') );
+
+fo = fopen(fullfile( '_data', 'precipitate_center_600F_2hrs.json'), 'w');
+fprintf( fo, '%s\n', savejson( [], precipitate) );
+fclose(fo);
+
 return
 %%

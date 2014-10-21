@@ -70,7 +70,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Finding Precipitate Phases in Al6061 Optical Micrographs</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Import Some Little Widgets</a></li><li><a href="#2">Load in Data</a></li><li><a href="#3">Plot raw Data</a></li><li><a href="#4">Smooth the Aged Data</a></li><li><a href="#5">Gradients should indicate the phases</a></li><li><a href="#6">Find Locally Minimal Pixels</a></li><li><a href="#7">Glue and Scotch Tape</a></li><li><a href="#8">Find Bright Spots in a Precipitate</a></li><li><a href="#9">Threshold potential centers</a></li></ul></div><h2>Import Some Little Widgets<a name="1"></a></h2><p>Normalize and adjust images.</p><pre class="codeinput"><span class="keyword">if</span> ~exist(<span class="string">'normalize'</span>,<span class="string">'var'</span>) | ~exist(<span class="string">'adjust'</span>,<span class="string">'var'</span>)
+  </style></head><body><div class="content"><h1>Finding Precipitate Phases in Al6061 Optical Micrographs</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Import Some Little Widgets</a></li><li><a href="#2">Load in Data</a></li><li><a href="#3">Plot raw Data</a></li><li><a href="#4">Smooth the Aged Data</a></li><li><a href="#5">Gradients should indicate the phases</a></li><li><a href="#6">Find Locally Minimal Pixels</a></li><li><a href="#7">Glue and Scotch Tape</a></li><li><a href="#8">Find Bright Spots in a Precipitate</a></li><li><a href="#9">Threshold potential centers</a></li><li><a href="#13">Export Centers as JSON</a></li></ul></div><h2>Import Some Little Widgets<a name="1"></a></h2><p>Normalize and adjust images.</p><pre class="codeinput"><span class="keyword">if</span> ~exist(<span class="string">'normalize'</span>,<span class="string">'var'</span>) | ~exist(<span class="string">'adjust'</span>,<span class="string">'var'</span>)
     <span class="comment">% GIST raw</span>
     rawurl = <span class="string">'https://gist.githubusercontent.com/tonyfast/8a2bb4752e0cfc55c99f/raw/f706ad03b824c4e17776d012eefd0ec755d133e5/adjust_normalize.m'</span>
     s = urlread(  rawurl );
@@ -142,8 +142,9 @@ ylim([ 443 700])
 Q = normalize( ( 1 - normalize( GG ) ) <span class="keyword">...</span>
     .* (1 - normalize(T) ) );
 </pre><h2>Find Bright Spots in a Precipitate<a name="8"></a></h2><pre class="codeinput">P = Find_Peaks( Q, <span class="string">'neighborhood'</span>,5, <span class="string">'diff'</span>, false);
-</pre><h2>Threshold potential centers<a name="9"></a></h2><pre class="codeinput">threshmult = 2;
-B = P &amp; E &lt; [mean(E(:)) - std(E(:)) * threshmult] ;
+</pre><h2>Threshold potential centers<a name="9"></a></h2><p>These are the two key parameters to modify to change the segmentation.</p><pre class="codeinput">threshmult = 1.5;
+cutoffpix = [mean(E(:)) - std(E(:)) * threshmult];
+</pre><pre class="codeinput">B = P &amp; E &lt; cutoffpix;
 </pre><p>Find matrix positions of centers</p><pre class="codeinput">[pid] = find(B);
 [xx,yy] = find(B);
 </pre><p>Plot Segmentation</p><pre class="codeinput">close <span class="string">all</span>
@@ -160,9 +161,34 @@ xlim([ 280.0309  792.0309])
 ylim([ 305.9960  817.9960])
 title( sprintf( <span class="string">'%i precipitates found. ZOOMED'</span>, numel( pid )  ) )
 snapnow;
-<span class="keyword">return</span>
 </pre><pre class="codeoutput">Warning: Image is too big to fit on screen; displaying at 25% 
-</pre><img vspace="5" hspace="5" src="imageanalysis_04.png" alt=""> <img vspace="5" hspace="5" src="imageanalysis_05.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="imageanalysis_04.png" alt=""> <img vspace="5" hspace="5" src="imageanalysis_05.png" alt=""> <h2>Export Centers as JSON<a name="13"></a></h2><pre class="codeinput"><span class="comment">% Create export structure</span>
+precipitate = struct( <span class="string">'center'</span>, [xx, yy], <span class="string">'cutoff'</span>, cutoffpix, <span class="string">'file'</span>, content(2).(<span class="string">'local'</span>) )
+
+<span class="comment">% Write data</span>
+fo = fopen(fullfile( <span class="string">'_data'</span>, <span class="string">'precipitate_center_600F_2hrs.json'</span>), <span class="string">'w'</span>)
+fprintf( fo, <span class="string">'%s\n'</span>, savejson( [], precipitate) );
+fclose(fo)
+
+<span class="keyword">return</span>
+</pre><pre class="codeoutput">
+precipitate = 
+
+    center: [12634x2 double]
+    cutoff: 0.3230
+      file: '_data/Al6061_Aged_650F_2hrs_RD_005.tif'
+
+
+fo =
+
+     5
+
+
+ans =
+
+     0
+
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2013a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Finding Precipitate Phases in Al6061 Optical Micrographs
 
@@ -289,8 +315,13 @@ P = Find_Peaks( Q, 'neighborhood',5, 'diff', false);
 
 
 %% Threshold potential centers
-threshmult = 2;
-B = P & E < [mean(E(:)) - std(E(:)) * threshmult] ;
+% These are the two key parameters to modify to change the segmentation.
+
+threshmult = 1.5;
+cutoffpix = [mean(E(:)) - std(E(:)) * threshmult];
+%%
+
+B = P & E < cutoffpix;
 
 %%
 % Find matrix positions of centers
@@ -315,6 +346,17 @@ xlim([ 280.0309  792.0309])
 ylim([ 305.9960  817.9960])
 title( sprintf( '%i precipitates found. ZOOMED', numel( pid )  ) )
 snapnow;    
+
+%% Export Centers as JSON
+
+% Create export structure
+precipitate = struct( 'center', [xx, yy], 'cutoff', cutoffpix, 'file', content(2).('local') )
+
+% Write data
+fo = fopen(fullfile( '_data', 'precipitate_center_600F_2hrs.json'), 'w')
+fprintf( fo, '%s\n', savejson( [], precipitate) );
+fclose(fo)
+
 return
 %%
 
