@@ -1,0 +1,43 @@
+---
+layout: post
+title:  "Tensile Test Result"
+author: jsweaver
+date:   2014-11-13 15:00:00
+---
+
+# Tensile results of Al-6061 for different over-aging temperatures #
+Specimens from a 1 inch thick **Al-6061 T6 plate** were mechanically tested with the tensile direction oriented in the **rolling (RD), transverse (TD), and 45 degrees** directions. Samples aged for 2 hours at **400, 525, 650, and 775 F** were tested in the RD direction. The main property of interest was yield strength.
+
+## Test Procedure Notes ##
+**ASTM E8-13a** was followed as closely as possible. **Round specimens with a diameter of 0.25 inches and gage section of 1 inch were used.** A screw type machine was used with threaded grips, a 200 kips load cell, and a 1 inch clip gage. The machine was run at a constant cross head speed to achieve a **strain rate of 0.005 in/in /s.** A pre-load of 20 lbs was used. The clip gage was removed when it reached a displacement of 0.098 inches. The test was continued until failure for all cases except in the aged specimens at 775 F which never failed. Five tests were run for each condition. 
+ 
+***Known problem:** The clip gage was attached with rubber bands and double sided tape was used to minimize slipping; however, it was difficult to reduce the gage drifting. This caused high variability and incorrect values for the Young's modulus.*  
+***Solution:** Zero the gage before attaching to the sample to maintain an accurate gage length of 1 inch. Use double sided carbon tape. In addition to rubberbands, use a small bungee around the center of the gage to stabilize it. When the pin is removed, the clip gage should not have changed more than ~0.1% strain. Discard tests with incorrect Modulus.*
+
+## Analysis Notes ##
+- Young's Modulus was determined from a linear fit of a region of the initial data. The strain was shifted so that the modulus line went through zero.  
+- An 0.2% offset strain was used to determine Yield Strength.
+- The ultimate tensile strength was taken as the maximum engineering stress.  
+- Strain <= 9.8% was determined from the clip gage. Strain > 9.8% was determined using the machine displacement. This is a pretty good approximation because the relationship between the clip gage strain and machine displacement is ~1 as the strain approaches 9.8%.
+- A short program in Matlab was used to analyze the data.
+
+## Results ##
+Each test has the stress-strain curves saved as an image and a data file saved as an excel spreadsheet.
+
+A summary of the results is below (Average/ Standard Deviation)  
+
+	Sample		Modulus	(ksi*10^3)	Strength (ksi)		UTS (ksi)
+	AR RD		11.4/ 1.14			44.1/ 0.123			47.7/ 0.191
+	AR TD		10.8/ 0.479			43.6/ 0.211			48.3/ 0.271
+	AR 45		10.2/ 1.69			42.2/ 0.336			47.2/ 0.191
+	400F		9.17/ 1.95			43.1/ 0.256			46.4/ 0.322
+	525F		9.49/ 0.688			26.0/ 0.041			33.2/ 0.101
+	650F		9.45/ 0.815			13.5/ 0.175			24.4/ 0.142
+	775F		9.48/ 1.07			8.63/ 0.253			20.3/ 0.119*
+	_* tests stopped before a maximum stress was reached
+
+The tensile curves can be viewed in this presentation (whens slideshare uploads my presentation!)
+
+
+
+	
