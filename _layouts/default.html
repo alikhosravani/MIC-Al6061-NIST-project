@@ -3,21 +3,17 @@
   {% include head.html %}
   <body>
     <div class="page-content">
-      <div class="wrapper">
-        <div class="notebook-bg">
+      <div class="wrapper notebook-bg">
         {% include header.html %}
         {{ content }}
-        </div>
         {% include references.html %}
         {% include paginate.html %}
-{% include disqus.html %}
+      </div>
+      <div class="wrapper">
+      {% include disqus.html %}
       </div>
 
     </div>
-
-    {% if page.latex %}
-      {% include latex.html %}
-    {% endif %}
     {% include footer.html %}
 
   </body>
