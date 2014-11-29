@@ -41,7 +41,7 @@ for xx = 1 : dx(1) : s(1)
             
             nwindow = nwindow + 1;
             
-            [fA,vectors] = SpatialStatsFFT( A( wx,wy ), [] ,...
+            [fA,vectors] = SpatialStatsFFT( A( wx,wy ), 1- A( wx,wy ) ,...
                                             'display', false ); 
                                         
             if nwindow == 1

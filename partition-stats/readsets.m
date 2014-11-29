@@ -28,7 +28,7 @@
 if ~isdir( 'MAT' ) mkdir( 'MAT' ); end
 
 
-runnm = 'ALL';
+runnm = 'CROSS';
 
 photoct = 0;
 
@@ -80,7 +80,7 @@ end
 
 %%
 
-runnm = 'ALL';
+runnm = 'CROSS';
 matdir = @(x)fullfile( 'MAT', sprintf('%s_%s.mat', runnm , x) )
 files = dir( matdir('*')  );
 F = [];
@@ -91,6 +91,7 @@ for ii = 1 : numel( files )
     F = vertcat( F, stats.feature );
     id = vertcat( id, ones(size(stats.feature,1),1)*ii );
     nm{ii} = photo.title;
+    src{ii} = photo.static;
 end
 
 %% Plot the PCA embedding
@@ -127,3 +128,21 @@ plot( [ accumarray( id(b), sqrt( sum(U.^2,2) ), [], @max), ...
     end
     hold off
     figure(gcf)
+    
+%% Convert to JSON for d3 browsing
+description = ...
+    horzcat( ...
+    'PCA embedding of the cross correlations of the images following', ...
+    ' a segmentation found in the code-base.'  );
+
+jsonstr = savejson( '', struct( 'embed', struct( 'C', id, ...
+                                           'src', char( src ) , ...
+                                           'name',char( nm ), ...
+                                           'X', U(:,1), ...
+                                           'Y', U(:,2) , ...
+                                           'description', description ) ), ....
+                           'ArrayIndent',0);
+                                       
+fo = fopen( 'assets/cross-correlation-embed.json', 'w' );
+fwrite( fo, jsonstr );
+fclose( fo );

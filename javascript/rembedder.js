@@ -33,8 +33,8 @@ var gembed = svgembed.append("g")
 
 d3.json( $(this).select("#embed-name").text().trim(), function( error, datain ){
 
-
-  data = datain
+    data = datain;
+  	$('#description').text( datain["embed"]["description"] );
 
     var colorlim = d3.scale.category10();
 
