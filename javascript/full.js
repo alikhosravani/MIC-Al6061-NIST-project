@@ -10,7 +10,13 @@ function HeaderOrder( $obj ){
 var toprank = 2;
 
 function Wrap_H_Section(){
-  $('article :header').each( function( i,d ){
+  blogcont = $('article :header')
+  if(blogcont.length == 0){
+    // Matlab publishing exception
+    blogcont = $('.content :header')
+  }
+
+  $(blogcont).each( function( i,d ){
     // Add section classed container for Fullpage
     $(this).before( "<div class='section'></div>")
 
@@ -93,3 +99,4 @@ $(document).ready( function (){
 /**
 **/
 // Make a "section" div element before
+ 
