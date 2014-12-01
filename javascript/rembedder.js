@@ -24,19 +24,34 @@ var svgembed = d3portal.append( "svg" )
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
 
-var gembed = svgembed.append("g")
+var ptembed = svgembed.append("g")
                   .attr("width", w)
                   .attr("height", h)
                   .attr("fill","black")
                   .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-                  .append("g")
+var xyembed = ptembed.append("g").attr('class','small');
+var gembed = ptembed.append("g");
+
+
 
 d3.json( $(this).select("#embed-name").text().trim(), function( error, datain ){
 
     data = datain;
   	$('#description').text( datain["embed"]["description"] );
 
-    var colorlim = d3.scale.category10();
+    var cscale = new Array;
+
+    // Augment number of categorical colors
+    var scale = d3.scale.category20b()
+    $.each( d3.range(20), function( d,i ){ cscale.push(scale( i ))})
+    var scale = d3.scale.category20c()
+    $.each( d3.range(20), function( d,i ){ cscale.push(scale( i ))})
+
+
+    var colorlim = d3.scale.ordinal()
+        .domain(d3.range(40))
+        .range(cscale);
+    //var colorlim = d3.scale.category20();
 
     var xscale = d3.scale.linear()
       .domain([d3.min(datain["embed"]["X"], function(d){return parseFloat(d);}) ,
@@ -75,7 +90,7 @@ d3.json( $(this).select("#embed-name").text().trim(), function( error, datain ){
           return yscale( datain["embed"]["Y"][i] )
         })
         .attr("fill",function( d,i){
-          return colorlim( datain["embed"]["C"][i])
+          return colorlim( datain["embed"]["C"][i] - 1)
         })
         .attr("stroke","black")
         .style("opacity",.7)
@@ -89,21 +104,46 @@ d3.json( $(this).select("#embed-name").text().trim(), function( error, datain ){
           }
           if (datain['embed'].hasOwnProperty('src')){
           $(imageview).attr("src",datain["embed"]["src"][i]);
-        }
+          }
+          $('.small').find('[fill="'+ colorlim( datain["embed"]["C"][i] -1) +'"]')
+                    .attr("stroke","black")
+                    .attr("stroke-width",2)
+
         })
-        .on("mouseout", function(d) {
+        .on("mouseout", function(d,i) {
           tooltip.transition()
           .duration(500)
           .style("opacity", 0);
           // Place image removing function here;
+
+          $('.small').find('[fill="'+ colorlim( datain["embed"]["C"][i] - 1) +'"]')
+                    .attr("stroke",null)
+
         })
         .on("click", function(){
           $(this).attr("stroke-width", 3);
         });
 
+  if(datain['embed'].hasOwnProperty('x')){
 
-}
-)
+    xyembed.selectAll(".dot")
+        .data( datain["embed"]["x"] )
+        .enter()
+        .append("circle")
+        .attr("r",6)
+        .attr("cx", function( d,i ){
+          return xscale( datain["embed"]["x"][i] )
+        })
+        .attr("cy", function( d,i ){
+          return yscale( datain["embed"]["y"][i] )
+        })
+        .attr("fill",function( d,i){
+          return colorlim( datain["embed"]["c"][i] - 1)
+        })
+        .style("opacity",.4)}
+
+  }
+  )
 });
 
 });

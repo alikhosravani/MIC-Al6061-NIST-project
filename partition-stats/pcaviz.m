@@ -27,5 +27,5 @@ for doi = 1 : 3;
     hold off;
 end
 subplot(2,2,4);
-imshow('test.png')
+imshow(IMG)
 figure(gcf)

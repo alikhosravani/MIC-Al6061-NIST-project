@@ -28,16 +28,15 @@
 if ~isdir( 'MAT' ) mkdir( 'MAT' ); end
 
 
-runnm = 'CROSS';
+runnm = 'CROSS_w200_dx_125';
 
 photoct = 0;
 
 for ii = 1 : 4
     
     set = loadjson( ...
-        fileread( sprintf( './_data/set%i.json',ii) ) ...
-        );
-    set = set.set;
+        fileread( sprintf( '../_data/set%i.json',ii) ) ...
+        );d
     
     for jj = 1 : numel( set.photoset.photo )
         photoct = photoct + 1;
@@ -58,8 +57,8 @@ for ii = 1 : 4
         IMG = double( IMG < .4 );
         
         s = size( IMG );
-        w = s;
-        dx = s ;
+        w = [200 200];
+        dx = [ 125 125];
         
         % Compute spatial statistics
         [stats] = partition( IMG, dx, w );
@@ -78,6 +77,7 @@ for ii = 1 : 4
     end    
 end
 
+return
 %%
 
 runnm = 'CROSS';

@@ -92,11 +92,26 @@ $(document).ready( function (){
         $(this).remove();
       }
     });
+
+    if(GetQueryStringParams('present')=='true') {
+      fullpageinit();
+    }
 //}
 });
 
-
-/**
+function GetQueryStringParams(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++)
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam)
+        {
+            return sParameterName[1];
+        }
+    }
+};/**
 **/
 // Make a "section" div element before
  
