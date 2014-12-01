@@ -1,0 +1,106 @@
+---
+layout: post
+title: A visualization exploration of reduced microstructure embeddings
+tagline: >
+    blah
+
+window:
+    sz: 200
+    cutoff: 100
+    num: 9 #pixels
+
+nsample: 40
+
+src:
+  issue: >
+    https://github.com/alikhosravani/MIC-Al6061-NIST-project/issues/5
+  code: >
+    https://github.com/alikhosravani/MIC-Al6061-NIST-project/blob/8c5ca9d62f56a740037bca6b058d041e2b3b5358/partition-stats/PCA_vs_LDA.m
+
+references:
+- http://en.wikipedia.org/wiki/Principal_component_analysis
+- http://en.wikipedia.org/wiki/Linear_discriminant_analysis
+- http://tonyfast.com/SpatialStatisticsFFT/2014/10/29/Spatial-Statistics-Tutorial-2.html#cross-correlations-on-synthetic-data
+- http://d3js.org/ #3
+---
+
+{% assign ref=page.references %}
+
+## A Comparison of Supervised and Unsupervised Learning
+
+A common question in materials informatics that arises when choosing data science tools is
+
+> When can I use supervised learning (e.g. [Linear Discriminant Analysis]({{ref[1]}}))?
+
+This post was inspired by a [Github Issue]({{page.src.issue}}).
+
+## The Experiment
+
+### The Datasets
+
+There are {{page.nsample}} micrographs who's locations are ``{% raw %}site.data['set*']{% endraw %}``.
+
+### Feature Identification
+
+* Segment the images
+
+  The segmentation procedure happens in [``readsets.m``](https://github.com/alikhosravani/MIC-Al6061-NIST-project/blob/a80e01177d976a9220a44960ad0381097d5661dd/partition-stats/readsets.m#L57).
+
+### Feature Encoding
+
+* Compute the [cross-correlation]({{ref[2]}}) for the segmented image
+* Truncate the statistics to a cuttoff of $\|{{page.window.cutoff}}\|$ pixels.
+
+### Data Analytics
+
+Three tests are executed.
+
+1. PCA on the expected value of the cross-correlation over the SVE's
+2. PCA on each of the SVE's as independent realizations of each other.
+3. LDA on each of the SVE's
+
+    The LDA supervisors are applied to SVE that come from the same image.
+
+### Visualization
+
+The interactive visualization tools are made using [d3.js]({{ref[3]}}).
+
+* The smaller, more opaque points indicate individual SVE's
+* The large points are the centroids of each SVE's embedding for **ONE** image
+* Mouseover the large points to highlight its SVE's and parent image.
+
+## PCA of the cross correlations
+
+1. Cross-correlation are computed for all segmented images.
+2. The CrossCorr was truncated to ``-100..100`` or a ``200x200`` window.
+3. PCA was performed on the truncated statistics.
+
+{% include rembedder.html file='/MIC-Al6061-NIST-project/assets/pca_cross_correlation_200.json' %}
+
+## PCA of cross correlations in SVE's
+
+1. {{page.window.num}} ${{page.window.sz}}^2$ SVE's were extracted from each image.
+1. Segmentation was performed
+1. The cross correlations as computed on each from ``-100..100``
+3. Unsupervised principal component analysis was computed over for each SVE.
+
+## The Embedding
+
+* The small points indicate each individual SVE.
+* The color classifies like points.
+* The large nodes and the centroids of the small points.  They represent an ensemble of the image statistics.
+* When a centroid is hovered over, it's SVE's will be highlighted.
+
+
+{% include rembedder.html file='/MIC-Al6061-NIST-project/assets/pca_cross_pca_200.json' %}
+
+## LDA of cross correlations in SVE's
+
+1. {{page.window.num}} ${{page.window.sz}}^2$ SVE's were extracted from each image.
+1. Segmentation was performed
+1. The cross correlations as computed on each from ``-100..100``
+3. Supervised LDA was computed over for each SVE.  The categories for the SVE's
+are defined by the image index they come from.  SVE's from different images are different classes.
+
+
+{% include rembedder.html file='/MIC-Al6061-NIST-project/assets/pca_cross_lda_200.json' %}
