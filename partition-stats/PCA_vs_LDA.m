@@ -90,7 +90,7 @@ convertjson;
 %%  LDA on the subvolumes
 subplot(2,3,2)
 [ U S V ] = pca( FL, 40 );
-[ U, mapping ] = lda( U, idL, 4 );
+[ U, mapping ] = lda( bsxfun( @minus, U, mean(U,1) ), idL, 4 );
 
 centroids = zeros( numel( unique( idL ) ), size( U,2) );
 for ii = 1 : size( U, 2)
