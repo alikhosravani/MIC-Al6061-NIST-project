@@ -18,7 +18,7 @@ paginate: 5
 
 
 gh:
-  user: alikhosravani
+  user: alikhosravani.github.io
   repo: Al6061-NIST-project
   # Branch hosting Github pages
   branch: gh-pages
