@@ -51,20 +51,25 @@ I found a systematic problem in the optical microscope which is related to the i
 * **Image segmentation:**
 I tried few segmentation codes that I found online for image segmentation. Most of them based on simple threshold cutoff and they didn't provide a promising segmentation parameters for all images. In one of the class report session, one group introduced an image segmentation algorithm, and that worked fine for OM datasets. Here is the link to the image segmentation post:  "[Multimodal Data Segmentation using Peak Fitting
 Algorithm and Gaussian Likelihood Maximization](http://awhite40.github.io/MIC-Modeling-Polymer-Composites/2014/10/15/Segmentation-via-Gaussian-Likelihood-Approximation.html)". 
-
 * **Extract particle information:** 
+Particle volume fraction, size, and spacing were calculated on each segmented image. Since the segmented image is a binary image, the volume fraction and particle size are the number of pixels for the particle phase in entire image and in each particle respectively. Spacing of particles were calculate based on Chord length in both horizontal, and vertical directions in the image.
 
 
 
 ### SEM datasets
 * **Data collection:**
+*SEM is used to image precipitates in the microstructure. I collected all SEM images with 100 micron view field with 48nm resolution. However, this resolution was not enough to image small precipitates in as-received, 400, 525 samples. Higher resolution images required from TEM.
 * **Image segmentation:**
+I had one main problem in this step. Most of the images for as-received sample and the ones aged at 400F, and 525F don't show precipitates in the matrix. So I don't know whether if precipitates exist and we can't see it or they  don't exist. I tried different combination of different settings in SEM and etching in order to reveal them but they didn't work well. In addition, for images with precipitates in matrix, I tried the same segmentation techniques for OM on SEM datasets. The segmenting code works well as long as the precipitates are small and distinct from constituent particles. For larger precipitates such as ones form at 775F, the segmentation code doesn't work perfectly. Also I tried a new segmentation  "[algorithm](http://alikhosravani.github.io/MIC-Al6061-NIST-project/2014/10/21/Segmenting-Precipitates-in-Al6061.html)", which find the center of small precipitates well. The algorithm find the center by multiplying the inverted image to its gradient.
 * **Extract precipitate information:**
+I didn't include precipitates statistics in final result for two reasons. First, not all the images show precipitates in the matrix, second so many precipitates have size of one or two pixels which makes segmentation with high uncertainty. I'm collecting new datasets with a higher resolution to have enough information about size and morphology of precipitates. 
 
 ### EBSD datasets
 * **Data collection:**
+* 
 * **Image segmentation:**
 * **Extract grain information:**
+
 ### Data Analysis 
 
 
@@ -72,4 +77,5 @@ Algorithm and Gaussian Likelihood Maximization](http://awhite40.github.io/MIC-Mo
 
 
 ## Closure and Future Work
+ 
  
