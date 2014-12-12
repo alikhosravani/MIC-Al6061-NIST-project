@@ -6,3 +6,70 @@ author: Ali Khosravani
 date:   2014-12-12 08:00:00
 ---
 
+# Executive Summary
+
+## Motivation and Objective
+Aluminum alloy Al6061 has wide range of application due to its properties. This alloy is a precipitate hardening alloy in which strengthening happens during aging process. In this process new phase start forming from supersaturated solid solution.  Many efforts have been done for last few decades to find the effect of aging process on precipitating and to connect final properties of materials to volume fraction, size, and interface nature of precipitates. However, properties of Al6061 is a combination of different structural features which exist at different length scales. Information about each of these microstructural features can be measured through different experimental technique. Therefore, finding  structure, property, processing linkages requires data analysis on multi-scale experimental datasets. 
+
+
+## Work flow
+
+Considering above-mentioned objective, we performed different microscopic techniques to collect data for each structural feature. The structural features are :
+
+* Coherent GP zones and semi-coherent precipitate particles
+* Al-Fe-Si-type constituent particles
+* Grain structure
+
+A list of parameters that need to be quantified was provided from our collaborator in NIST and ASM international. This parameters is basically a quantifying values for each structural features. These parameters are listed as below:
+
+
+* Volume fraction, Size (nm), Aspect ratio, Spacing (nm) of precipitate particles
+* Volume fraction, Size (nm), Aspect ratio, Spacing (nm) of constituent particles
+* Size (microns), Aspect ratio of grains and the strengths of different texture orientations. 
+
+Microscopic techniques used in this project are:
+
+* Optical Microscopy (**OM**)
+* Scanning Electron Microscopy (**SEM**)
+* Electron Back Scattered Diffraction (**EBSD**)
+
+###**Project plan falls into following directions:**
+
+* Performing aging treatment on materials at different temperature conditions.
+* Collecting datasets from each condition using OM, SEM, and EBSD techniques.
+* Extracting parameter listed above for each structural feature.
+* Performing mechanical testing on each condition, and calculating property information. 
+* Running PCA on entire datasets to find structure, property linkage.
+
+## Challenges and Trials 
+
+### OM datasets
+* **Data collection:**
+the main challenge in this part was etching of samples. We tried etching techniques to reveal precipitates in OM but they didn't work well. So we decided to use OM only for  constituent particles. Also we tried to collect images at different magnification and run segmentation to see what magnification is the best in  terms of the area size, and pixel resolution. The images collected at 50X provide a good resolution, however, few constituent particles exist in each image. Magnification of 10X covers large area on the sample but the resolution is not enough to resolve particles which are close to each other. Finally, we decided to use 20X magnification, and I collected 10 images at random regions of the sample.
+* **Image correction:**
+I found a systematic problem in the optical microscope which is related to the illumination part in the microscope. This problem causes a gradient of intensity cross the image from right to left. We are trying to make a executable file on microscope computer as a post-processing tool to remove the shadow from each image that taken on microscope and save it as a new file. The code fits a surface to the average intensity of each image using regression and  change background intensity to an even level for entire sample.
+* **Image segmentation:**
+I tried few segmentation codes that I found online for image segmentation. Most of them based on simple threshold cutoff and they didn't provide a promising segmentation parameters for all images. In one of the class report session, one group introduced an image segmentation algorithm, and that worked fine for OM datasets. Here is the link to the image segmentation post:  "[Multimodal Data Segmentation using Peak Fitting
+Algorithm and Gaussian Likelihood Maximization](http://awhite40.github.io/MIC-Modeling-Polymer-Composites/2014/10/15/Segmentation-via-Gaussian-Likelihood-Approximation.html)". 
+
+* **Extract particle information:** 
+
+
+
+### SEM datasets
+* **Data collection:**
+* **Image segmentation:**
+* **Extract precipitate information:**
+
+### EBSD datasets
+* **Data collection:**
+* **Image segmentation:**
+* **Extract grain information:**
+### Data Analysis 
+
+
+## Collaborations
+
+
+## Closure and Future Work
+ 
