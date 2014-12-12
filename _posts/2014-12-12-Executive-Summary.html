@@ -6,6 +6,7 @@ author: Ali Khosravani
 date:   2014-12-12 08:00:00
 ---
 
+
 # Executive Summary
 
 ## Motivation and Objective
@@ -43,7 +44,7 @@ Microscopic techniques used in this project are:
 
 ## Challenges and Trials 
 
-#### OM datasets
+#### *OM datasets*
 * **Data collection:**
 the main challenge in this part was etching of samples. We tried etching techniques to reveal precipitates in OM but they didn't work well. So we decided to use OM only for  constituent particles. Also we tried to collect images at different magnification and run segmentation to see what magnification is the best in  terms of the area size, and pixel resolution. The images collected at 50X provide a good resolution, however, few constituent particles exist in each image. Magnification of 10X covers large area on the sample but the resolution is not enough to resolve particles which are close to each other. Finally, we decided to use 20X magnification, and I collected 10 images at random regions of the sample.
 * **Image correction:**
@@ -56,7 +57,7 @@ Particle volume fraction, size, and spacing were calculated on each segmented im
 
 
 
-#### SEM datasets
+#### *SEM datasets*
 * **Data collection:**
 *SEM is used to image precipitates in the microstructure. I collected all SEM images with 100 micron view field with 48nm resolution. However, this resolution was not enough to image small precipitates in as-received, 400, 525 samples. Higher resolution images required from TEM.
 * **Image segmentation:**
@@ -64,7 +65,7 @@ I had one main problem in this step. Most of the images for as-received sample a
 * **Extract precipitate information:**
 I didn't include precipitates statistics in final result for two reasons. First, not all the images show precipitates in the matrix, second so many precipitates have size of one or two pixels which makes segmentation with high uncertainty. I'm collecting new datasets with a higher resolution to have enough information about size and morphology of precipitates. 
 
-#### EBSD datasets
+#### *EBSD datasets*
 * **Data collection:**
 * The main challenge in EBSD is to collect data from a large area. Each EBSD data contains 75 smaller scans with a resolution of 4 micron. EBSD details for different condition are presented in a "[post](http://alikhosravani.github.io/MIC-Al6061-NIST-project/2014/11/05/Project-progress.html)". 
 * **Extract grain information:**
