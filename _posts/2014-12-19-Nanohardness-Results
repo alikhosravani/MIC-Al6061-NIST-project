@@ -1,0 +1,49 @@
+---
+layout: post
+title:  "Berkovich Nanohardness and Modulus Results"
+author: jsweaver
+date:   2014-12-19 16:00:00
+---
+
+## Background ##
+
+### Sample Preparation ###
+A series of Al-6061 specimens were prepared by aging for two hours at different temperatures (400, 525, 650, and 775 F) from an as received (AR) 1" thick plate. Samples for all conditions oriented with the surface normal in the rolling direction (RD) were mounted in epoxy, metallographicaly prepared, and electropolished. (Same samples used for SEM and EBSD analysis).
+
+### Test Procedure ###
+A G200 Agilent Nanoindenter with XP head, CSM Modulue, and diamond Berkovich tip was used to measure hardness and modulus via the Oliver-Pharr Analysis. A 3x3 grid equally spaced by 300 microns was randomly (with no respect to grain boundaries or precipitates) placed in the center of each sample. The test was run with CSM (2nm, 45Hz) at a constant strain rate (loading rate/ load) of 0.05 /s to a final displacement of 2000nm. The area function for the Berkovich tip was calibrated on fused silica and is summarized below.
+
+    Tip Name: TB21844 Silica 20140827					
+    Tip Modulus: 1.1410e+006 MPa		
+    Tip Poisson: 0.0700
+    Frame Stiffness: 7.1281e+010 N/m
+    
+    Tip Area Constant: 0.0000
+    Tip Coefficients			
+    m0: 24.5000				
+    m1: 140.9376				
+    m2: -3795.8448				
+    m3: 5497.9100				
+    m4: 0.0000				
+    m5: 0.0000				
+    m6: 0.0000				
+    m7: 0.0000				
+    m8: 0.0000				
+
+The average Modulus and Hardness were calculated over a depth range of 200 to 2000 nm. A Poisson ration of 0.3 was used in the calculation of Modulus. Tests that did not have consistent load-displacement curves or didn't run because of any test errors were not included in the average calculations (listed as tagged).
+
+## Results ##
+
+	Sample	Avg. Modulus	Avg. Hardness
+	 		 / Stdev [GPa]	 / Stdev [GPa]
+	
+	AR		82.5 / 0.6		1.42 / 0.01
+	400F	84.8 / 1.2		1.49 / 0.04
+	525F	82.3 / 0.8		0.99 / 0.02
+	650F	80.2 / 3.2		0.67 / 0.07
+	775F	82.4 / 1.9		0.64 / 0.02
+
+Data in .mss and .xlsx format can be found (here)[https://www.dropbox.com/sh/3rzj30segmb6u6s/AABO-X08YclbuNecPASP2Ipea?dl=0]
+
+## Discussion ##
+The modulus and hardness were relatively constant as a function of depth after 200 nm. The modulus decreases slightly with increasing depth suggesting that possibly a more accurate frame stiffness could be used since we don't expect the modulus to change with depth. The modulus is higher than reported literature values ( ~ 70 GPa) which begs the question: Is the area function accurate for Al-6061? Nanoindentation literature on Al-6061 needs to be consulted to address this question and for commenting on the relative accuracy of hardness values. However, we see the same trends from tensile testing: constant modulus, decreasing strength/hardness with increasing aging temperature.
